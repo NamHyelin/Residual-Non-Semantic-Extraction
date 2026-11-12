@@ -1,0 +1,21 @@
+{
+  "input_image": "C:/Users/hyeli/Downloads/drive-download-20250625T050437Z-1-001/img_ref1.jpg",
+  "device": "cuda",
+  "caption_original": "a small dog running through a field of grass",
+  "caption_received": "a small dog running through a field of grass",
+  "prompt_used_for_decoding": "a small dog running through a field of grass",
+  "text_ber": 0.0,
+  "edge_ber": 0.0,
+  "clip_score": null,
+  "ms_ssim_score": null,
+  "snr_db_text": 50.0,
+  "snr_db_edge": 50.0,
+  "num_inference_steps": 500,
+  "guidance_scale": 10,
+  "image_size": 256,
+  "artifacts": {
+    "edge_map": "C:/TransUnrecon/VAE_MNIST_2/GSemComm\\edge_map.png",
+    "received_edge_map": "C:/TransUnrecon/VAE_MNIST_2/GSemComm\\received_edge_map.png",
+    "reconstructed": "C:/TransUnrecon/VAE_MNIST_2/GSemComm\\reconstructed.png"
+  }
+}
