@@ -65,7 +65,6 @@ A shared projection matrix is precomputed from the averaged reconstruction-error
 <p align="center">
   <img src="results.png" width=30% alt="Motivation and hybrid semantic communication framework" />
 </p>
-
 Increasing the NSR dimension progressively reduces reconstruction MSE and restores image-specific details. The evaluated autoencoder- and GenAI-based systems show greater fidelity improvements from additional NSR transmission than from increasing the semantic representation alone, under noisy channels.
 ---
 
