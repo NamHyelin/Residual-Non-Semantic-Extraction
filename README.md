@@ -2,9 +2,9 @@
 
 **Hybrid Semantic Communication for Controllable Image Reconstruction Fidelity**
 
-This repository provides the implementation of **hybrid semantic communication (HSC)**, which complements semantic representations with residual image-specific information for high-fidelity wireless image reconstruction.
+This repository provides the implementation of **hybrid semantic communication (HSC)**, which complements AI-based semantic representations with residual image-specific information for high-fidelity wireless image reconstruction.
 
-By adjusting the size of the transmitted **non-semantic representation (NSR)**, HSC controls reconstruction fidelity beyond the limitations of a fixed semantic representation.
+By adjusting the size of the transmitted **non-semantic representation (NSR)** with linear projection encoding process, HSC controls reconstruction fidelity given as a mathematical closed form beyond the limitations of a fixed semantic representation.
 
 [![Python](https://img.shields.io/badge/Python-262139?style=for-the-badge&logo=python&logoColor=F472B6)](#)
 [![PyTorch](https://img.shields.io/badge/PyTorch-252341?style=for-the-badge&logo=pytorch&logoColor=A78BFA)](#)
@@ -30,6 +30,7 @@ By adjusting the size of the transmitted **non-semantic representation (NSR)**, 
 *IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), Barcelona, Spain, 2026, pp. 21326–21330.*
 
 [![IEEE Paper](https://img.shields.io/badge/IEEE-Paper-252341?style=for-the-badge&logo=ieee&logoColor=A78BFA)](https://doi.org/10.1109/ICASSP55912.2026.11464070)
+[![Google Scholar](https://scholar.google.com/citations?view_op=view_citation&hl=ko&user=KTjNYtAAAAAJ&sortby=pubdate&citation_for_view=KTjNYtAAAAAJ:eQOLeE2rZwMC)
 
 ---
 
@@ -41,9 +42,9 @@ By adjusting the size of the transmitted **non-semantic representation (NSR)**, 
 </p>
 
 
-Semantic communication can preserve the overall meaning of an image while losing image-specific details. Autoencoder-based systems typically use a fixed-size semantic representation, while increasing the semantic payload in generative systems does not necessarily recover pixel-level details.
+Semantic communication can preserve the overall meaning of an image while losing image-specific details. Autoencoder-based systems typically use a fixed-size semantic representation, while increasing the semantic payload in GenAI-generated representation does not necessarily recover pixel-level details.
 
-HSC supplements semantic transmission with a compact projection of the source image, **AX**, that conveys information missing from the semantic reconstruction. At the receiver, this NSR refines the reconstructed image. The projection dimension **d** determines the additional transmission load and enables controllable reconstruction fidelity across autoencoder- and generative AI-based frameworks.
+HSC supplements semantic transmission with a compact projection of the source image, **AX**, that conveys information missing from the semantic reconstruction. At the receiver, this NSR refines the reconstructed image. The projection dimension **d** determines the additional transmission load and enables controllable reconstruction fidelity across autoencoder- and generative AI-based frameworks. The linear projection method is proposed in two ways.
 
 
 <p align="center">
@@ -52,7 +53,7 @@ HSC supplements semantic transmission with a compact projection of the source im
 
 ### First-Order HSC
 
-An image-specific projection matrix is constructed from the dominant eigenvectors of the reconstruction-error matrix. It targets the residual details of each image, with a closed-form characterization of reconstruction MSE as the projection dimension increases.
+An image-specific projection matrix **A** is constructed from the dominant eigenvectors of the reconstruction-error matrix. It targets the residual details of each image, with a closed-form characterization of reconstruction MSE as the projection dimension increases.
 
 ### Second-Order HSC
 
@@ -65,10 +66,7 @@ A shared projection matrix is precomputed from the averaged reconstruction-error
   <img src="results.png" alt="Motivation and hybrid semantic communication framework" />
 </p>
 
-Increasing the NSR dimension progressively reduces reconstruction MSE and restores image-specific details. The evaluated autoencoder- and diffusion-based systems show greater fidelity improvements from additional NSR transmission than from increasing the semantic representation alone.
-
-Under fading channels, second-order HSC also benefits from fine-tuning the semantic communication model with the shared projection matrix, improving reconstruction quality over the configuration without fine-tuning.
-
+Increasing the NSR dimension progressively reduces reconstruction MSE and restores image-specific details. The evaluated autoencoder- and GenAI-based systems show greater fidelity improvements from additional NSR transmission than from increasing the semantic representation alone, under noisy channels.
 ---
 
 ## Getting Started
@@ -99,7 +97,7 @@ method = "VAE"
 save_method = "VAE_SecondOrder"
 ```
 
-For first-order HSC, change `save_method` to `"VAE_FirstOrder"`. Keep the model architecture, checkpoint, and precomputed matrices consistent with the selected experiment.
+For first-order HSC, change `save_method` to `"VAE"`. Keep the model architecture, checkpoint, and precomputed matrices consistent with the selected experiment.
 
 ### Run Evaluation
 
@@ -113,7 +111,6 @@ The default entry point evaluates reconstruction error as the NSR dimension vari
 test_SNR_2(bidx=bidx, method=method, save_method=save_method)
 ```
 
-Then run `python test.py` again. If using a local version with a separate `test_SNR.py` entry point, run `python test_SNR.py` instead; that standalone file is not included in the current public repository.
 
 Evaluation outputs are saved under `results/` using the selected `save_method` label.
 
